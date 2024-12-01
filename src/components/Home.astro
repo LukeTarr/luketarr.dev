@@ -1,0 +1,41 @@
+---
+import Image from 'astro/components/Image.astro';
+import lukeImage from '../assets/luke.png';
+import TitleCycler from './react/TitleCycler';
+---
+
+<html>
+    <head>
+        <title>Luke Tarr - Portfolio</title>
+        <link
+            href='https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css'
+            rel='stylesheet'
+        />
+    </head>
+    <body class='flex w-full bg-gradient-to-r from-indigo-200 to-emerald-200'>
+        <div
+            class='flex flex-col items-center justify-start w-full h-full text-center m-10'
+        >
+            <div>
+                <h1 class='mt-6 text-6xl font-bold'>Hey, I'm Luke Tarr!</h1>
+                <TitleCycler client:load />
+            </div>
+
+            <div
+                class='flex flex-row items-center justify-between w-full h-full'
+            >
+                <div class='w-full'>
+                    <Image src={lukeImage} alt='Luke Tarr' class='max-w-xl' />
+                </div>
+
+                <div class='w-full text-start'>
+                    <p class='text-slate-900 text-5xl'>
+                        Welcome to my portfolio website. Here you can find my
+                        projects, blog posts, and more about my journey in
+                        software development.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
