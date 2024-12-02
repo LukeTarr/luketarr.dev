@@ -5,25 +5,25 @@ import Navbar from '../components/Navbar.astro';
 
 <!doctype html>
 <html lang='en'>
-	<head>
-		<meta charset='UTF-8' />
-		<meta name='viewport' content='width=device-width' />
-		<link rel='icon' type='image/svg+xml' href='/favicon.svg' />
-		<meta name='generator' content={Astro.generator} />
-		<title>luketarr.dev</title>
-	</head>
-	<body>
-		<Navbar />
-		<slot />
-		<Footer />
-	</body>
+<head>
+    <meta charset='UTF-8'/>
+    <meta name='viewport' content='width=device-width'/>
+    <link rel='icon' type='image/png' href='/favicon.png'/>
+    <meta name='generator' content={Astro.generator}/>
+    <title>luketarr.dev</title>
+</head>
+<body>
+<Navbar/>
+<slot/>
+<Footer/>
+</body>
 </html>
 
 <style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
+    html,
+    body {
+        margin: 0;
+        width: 100%;
+        height: 100%;
+    }
 </style>
