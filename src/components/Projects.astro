@@ -1,0 +1,32 @@
+---
+
+import ProjectCard from "./ProjectCard.astro";
+import UnderConstructionLabel from "./UnderConstructionLabel.astro";
+
+---
+
+
+<html>
+<head>
+    <title>luketarr.dev</title>
+</head>
+<body class='flex flex-col items-center justify-start w-full'>
+  <div class='md:mx-0 mx-4 text-center'>
+      <h1 class='mt-6 text-6xl font-bold'>Hey, I'm Luke Tarr!</h1>
+      <UnderConstructionLabel />
+  </div>
+
+  <div class="flex items-center justify-center">
+      <div class="grid md:grid-cols-2 sm:grid-cols-1 w-full h-80">
+          <ProjectCard />
+          <ProjectCard />
+          <ProjectCard />
+          <ProjectCard />
+      </div>
+
+</div>
+
+
+
+</body>
+</html>
