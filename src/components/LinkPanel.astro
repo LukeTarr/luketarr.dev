@@ -5,13 +5,16 @@ const xUrl = 'https://x.com/lukertarr';
 
 <div class='flex flex-row'>
     <div class='flex items-center justify-center mx-10 w-full'>
-        <a href={githubUrl} target='_blank' rel='noopener noreferrer'>
+        <a href={githubUrl} target='_blank' rel='noopener noreferrer' aria-label="Luke Tarr's GitHub profile">>
             <svg
                     class='h-16 w-16'
                     xmlns='http://www.w3.org/2000/svg'
                     width='16'
                     height='16'
                     viewBox='0 0 16 16'
+                    role="img"
+                    aria-labelledby="Github Icon"
+
             >
                 <path
                         fill='currentColor'
@@ -22,13 +25,15 @@ const xUrl = 'https://x.com/lukertarr';
     </div>
 
     <div class='flex items-center justify-center mx-10 w-full'>
-        <a href={xUrl} target='_blank' rel='noopener noreferrer'>
+        <a href={xUrl} target='_blank' rel='noopener noreferrer' aria-label="Luke Tarr's X.com profile">>
             <svg
                     class='h-16 w-16'
                     xmlns='http://www.w3.org/2000/svg'
                     width='24'
                     height='24'
                     viewBox='0 0 24 24'
+                    role="img"
+                    aria-labelledby="X.com Icon"
             >
                 <path
                         fill='currentColor'
