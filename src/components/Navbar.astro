@@ -1,13 +1,19 @@
 ---
-import {Fragment} from 'astro/jsx-runtime';
+import { Fragment } from 'astro/jsx-runtime';
 ---
 
 <nav
-        class='flex flex-row justify-between bg-gray-800 w-full p-4 md:p-4 md:w-10/12 md:rounded-full md:mt-4'
+    class='flex flex-row items-center justify-between bg-gray-800 w-full p-4 mt-0 md:mt-4 md:w-10/12 md:rounded-full'
 >
-    <div class='flex flex-row items-center justify-center md:mx-10'>
-        <img src='../../public/favicon.png' alt='Luke Tarr Logo' class='w-10 h-10 mr-4'/>
-        <a href='/' class='text-white text-2xl font-bold'>luketarr.dev</a>
+    <div class='flex flex-row items-center justify-around md:mx-10'>
+        <a href='/' class='w-10 h-10 mr-4'>
+            <img src='favicon.png' alt='Luke Tarr Logo' />
+        </a>
+        <a
+            href='/'
+            class='text-white text-2xl font-bold invisible w-0 md:w-au md:visible'
+            >luketarr.dev</a
+        >
     </div>
     <div class='flex flex-row items-center justify-center md:mx-10'>
         <ul class='flex space-x-4'>
@@ -15,7 +21,9 @@ import {Fragment} from 'astro/jsx-runtime';
                 <a href='/' class='text-white hover:text-gray-400'>Home</a>
             </li>
             <li>
-                <a href='/projects' class='text-white hover:text-gray-400'>Projects</a>
+                <a href='/projects' class='text-white hover:text-gray-400'
+                    >Projects</a
+                >
             </li>
             <li>
                 <a href='/blog' class='text-white hover:text-gray-400'>Blog</a>

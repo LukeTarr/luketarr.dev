@@ -5,31 +5,43 @@ import Navbar from '../components/Navbar.astro';
 
 <!doctype html>
 <html lang='en'>
-<head>
-    <meta charset='UTF-8'/>
-    <meta name='viewport' content='width=device-width'/>
-    <link rel='icon' type='image/png' href='/favicon.png'/>
-    <meta name='generator' content={Astro.generator}/>
-    <meta name=description content="The personal site for Luke Tarr, a software developer: luketarr.dev">
-    <meta property="og:title" content="luketarr.dev">
-    <meta property="og:description" content="The personal site for Luke Tarr, a software developer: luketarr.dev">
-    <meta property="og:url" content="https://luketarr.dev">
-    <meta property="og:type" content="website">
-    <title>luketarr.dev</title>
-</head>
-<body>
-<Navbar/>
-<slot/>
-<Footer/>
-</body>
-</html>
+    <head>
+        <meta charset='UTF-8' />
+        <meta name='viewport' content='width=device-width' />
+        <link rel='icon' type='image/png' href='/favicon.png' />
+        <meta name='generator' content={Astro.generator} />
+        <meta
+            name='description'
+            content='The personal site for Luke Tarr, a software developer: luketarr.dev'
+        />
+        <meta property='og:title' content='luketarr.dev' />
+        <meta
+            property='og:description'
+            content='The personal site for Luke Tarr, a software developer: luketarr.dev'
+        />
+        <meta property='og:url' content='https://luketarr.dev' />
+        <meta property='og:type' content='website' />
+        <title>luketarr.dev</title>
 
-<style>
-    html,
-    body {
-        margin: 0;
-        width: 100%;
-        height: 100%;
-        @apply bg-gradient-to-r from-indigo-200 to-emerald-200;
-    }
-</style>
+        <link rel='preconnect' href='https://fonts.googleapis.com' />
+        <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin />
+        <link
+            href='https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap'
+            rel='stylesheet'
+        />
+    </head>
+    <body>
+        <div
+            class='bg-zinc-100 bg-horizonAnimated bg-cover bg-scroll bg-center bg-no-repeat w-full
+            flex flex-col items-center justify-center'
+        >
+            <Navbar />
+            <div
+                class='grid min-h-dvh grid-cols-1 place-content-center place-items-center gap-5 w-full'
+            >
+                <slot />
+                <Footer />
+            </div>
+        </div>
+    </body>
+</html>
