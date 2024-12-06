@@ -1,28 +1,41 @@
 ---
 const githubUrl = 'https://github.com/LukeTarr';
 const xUrl = 'https://x.com/lukertarr';
+const linkedinUrl = 'https://linkedin.com/in/luke-tarr';
 ---
 
-<div class='flex flex-row'>
-    <div class='flex items-center justify-center mx-10 w-full'>
-        <a
+<div class='flex flex-row items-center justify-center w-full'>
+
+    <a
+            href={linkedinUrl}
+            target='_blank'
+            rel='noopener noreferrer'
+            aria-label="Luke Tarr's LinkedIn profile"
+            class="mx-4"
+    >
+        <img src='linkedin.svg' alt='GitHub Logo' class='h-16 w-16'/>
+    </a>
+
+
+    <a
             href={githubUrl}
             target='_blank'
             rel='noopener noreferrer'
             aria-label="Luke Tarr's GitHub profile"
-        >
-            <img src='github.svg' alt='GitHub Logo' class='h-16 w-16' />
-        </a>
-    </div>
+            class="mx-4"
+    >
+        <img src='github.svg' alt='GitHub Logo' class='h-16 w-16'/>
+    </a>
 
-    <div class='flex items-center justify-center mx-10 w-full'>
-        <a
+
+    <a
             href={xUrl}
             target='_blank'
             rel='noopener noreferrer'
             aria-label="Luke Tarr's X.com profile"
-        >
-            <img src='x.svg' alt='GitHub Logo' class='h-16 w-16' />
-        </a>
-    </div>
+            class="mx-4"
+    >
+        <img src='x.svg' alt='X.com Logo' class='h-16 w-16'/>
+    </a>
+
 </div>
