@@ -5,23 +5,34 @@ import Navbar from '../components/Navbar.astro';
 
 <!doctype html>
 <html lang='en'>
-<head>
-    <meta charset='UTF-8'/>
-    <meta name='viewport' content='width=device-width'/>
-    <link rel='icon' type='image/png' href='/favicon.png'/>
-    <meta name='generator' content={Astro.generator}/>
-    <meta name=description content="The personal site for Luke Tarr, a software developer: luketarr.dev">
-    <meta property="og:title" content="luketarr.dev">
-    <meta property="og:description" content="The personal site for Luke Tarr, a software developer: luketarr.dev">
-    <meta property="og:url" content="https://luketarr.dev">
-    <meta property="og:type" content="website">
-    <title>luketarr.dev</title>
-</head>
-<body>
-<Navbar/>
-<slot/>
-<Footer/>
-</body>
+    <head>
+        <meta charset='UTF-8' />
+        <meta name='viewport' content='width=device-width' />
+        <link rel='icon' type='image/png' href='/favicon.png' />
+        <meta name='generator' content={Astro.generator} />
+        <meta
+            name='description'
+            content='The personal site for Luke Tarr, a software developer: luketarr.dev'
+        />
+        <meta property='og:title' content='luketarr.dev' />
+        <meta
+            property='og:description'
+            content='The personal site for Luke Tarr, a software developer: luketarr.dev'
+        />
+        <meta property='og:url' content='https://luketarr.dev' />
+        <meta property='og:type' content='website' />
+        <title>luketarr.dev</title>
+    </head>
+    <body>
+        <div
+            class='flex items-center justify-center w-full bg-slate-800 pb-4 md:pb-8'
+        >
+            <Navbar />
+        </div>
+
+        <slot />
+        <Footer />
+    </body>
 </html>
 
 <style>
