@@ -23,16 +23,13 @@ import Navbar from '../components/Navbar.astro';
     <meta property='og:type' content='website'/>
     <title>luketarr.dev</title>
 </head>
-<body class="bg-slate-100">
+<body class="bg-slate-100 m-0">
 <div
         id="root"
         class='bg-zinc-100 bg-cover bg-scroll bg-center w-full
-            flex flex-col items-center justify-center'
->
+            flex flex-col items-center justify-center'>
     <Navbar/>
-    <div
-            class='grid grid-cols-1 place-content-center place-items-center gap-5 w-full'
-    >
+    <div class='grid grid-cols-1 place-content-center place-items-center gap-5 w-full'>
         <slot/>
         <Footer/>
     </div>
@@ -42,6 +39,7 @@ import Navbar from '../components/Navbar.astro';
 
 <!--astro style-->
 <style>
+    @import "tailwindcss";
     #root {
         background-image: url('/horizon-animated.svg')
     }
