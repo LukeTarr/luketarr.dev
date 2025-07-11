@@ -25,9 +25,10 @@ import Navbar from '../components/Navbar.astro';
     <title>luketarr.dev</title>
 </head>
 <body class="bg-slate-100 m-0">
+<div id="background" aria-hidden="true"></div>
 <div
         id="root"
-        class='bg-zinc-100 bg-cover bg-scroll bg-center w-full
+        class='w-full
             flex flex-col items-center justify-center'>
     <Navbar/>
     <div class='grid grid-cols-1 place-content-center place-items-center gap-5 w-full'>
@@ -40,7 +41,26 @@ import Navbar from '../components/Navbar.astro';
 
 <!--astro style-->
 <style>
+    #background {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        width: 100vw;
+        height: 100vh;
+        --s: 208px;
+        --c1: #ffffff;
+        --c2: #cdced0;
+        --c3: #ababab;
+        background:
+            repeating-conic-gradient(from 30deg,#0000 0 120deg,var(--c3) 0 50%) 
+            calc(var(--s)/2) calc(var(--s)*tan(30deg)/2),
+            repeating-conic-gradient(from 30deg,var(--c1) 0 60deg,var(--c2) 0 120deg,var(--c3) 0 50%);
+        background-size: var(--s) calc(var(--s)*tan(30deg));
+        pointer-events: none;
+    }
     #root {
-        background-image: url('/horizon-animated.svg')
+        position: relative;
+        z-index: 1;
+        /* No background color, so the background gradient shows through */
     }
 </style>
