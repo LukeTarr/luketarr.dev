@@ -1,8 +1,18 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import UnderConstructionLabel from "../components/UnderConstructionLabel.astro";
+import { getCollection } from 'astro:content';
+const posts = await getCollection('blog');
 ---
-
 <Layout>
-    <UnderConstructionLabel/>
+  <h1 class="text-4xl font-bold text-center my-8">Blog</h1>
+  <ul class="max-w-2xl mx-auto">
+    {posts.length === 0 && <li>No blog posts found.</li>}
+    {posts.reverse().map(post => (
+      <li class="mb-8 border-b pb-4">
+        <a href={"/blog/" + post.slug} class="text-2xl font-semibold text-blue-700 hover:underline">{post.data.title}</a>
+        <div class="text-gray-500 text-sm">{post.data.date}</div>
+        <div class="text-gray-700 mb-2">{post.data.description}</div>
+      </li>
+    ))}
+  </ul>
 </Layout>
