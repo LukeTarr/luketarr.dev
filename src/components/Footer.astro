@@ -1,19 +1,40 @@
 ---
-import LinkPanel from './LinkPanel.astro';
+import SocialLinks from './SocialLinks.astro';
+import { site } from '../data/site';
+
+const year = new Date().getFullYear();
 ---
 
-<footer class='flex flex-col items-center justify-center w-10/12 mb-auto'>
-    <hr class='w-full h-2 bg-slate-900 my-6'/>
-    <LinkPanel/>
-    <p class='text-xl mt-12'>
-        Made with 🚀 in
-        <a
-                target='_blank'
-                class='underline'
-                href='https://astro.build'
-                aria-label="Astro's Homepage: the tool I used to generate this site"
-        >
-            astro.build
-        </a>
-    </p>
+<footer class="mx-auto mt-24 w-full max-w-5xl px-6 pb-10 md:px-10">
+	<!-- A hand-drawn horizon line in place of a hard rule. -->
+	<svg
+		viewBox="0 0 1000 24"
+		preserveAspectRatio="none"
+		aria-hidden="true"
+		class="mb-8 h-4 w-full text-ink/20"
+	>
+		<path
+			d="M0 14 C 120 4, 220 22, 340 12 S 560 2, 680 14 S 880 22, 1000 10"
+			fill="none"
+			stroke="currentColor"
+			stroke-width="1.5"
+			vector-effect="non-scaling-stroke"></path>
+	</svg>
+
+	<div class="flex flex-col-reverse items-center justify-between gap-6 sm:flex-row">
+		<p class="text-center text-sm text-ink/60 sm:text-left">
+			© {year}
+			{site.name} · Made with 🚀 in
+			<a
+				href="https://astro.build"
+				target="_blank"
+				rel="noopener noreferrer"
+				aria-label="Astro's Homepage: the tool I used to generate this site"
+				class="underline decoration-accent/40 underline-offset-4 transition-colors hover:text-accent hover:decoration-accent"
+			>
+				astro.build
+			</a>
+		</p>
+		<SocialLinks />
+	</div>
 </footer>

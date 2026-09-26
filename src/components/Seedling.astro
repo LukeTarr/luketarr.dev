@@ -1,0 +1,42 @@
+---
+interface Props {
+	class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<!-- A seedling: things are growing here. -->
+<svg viewBox="0 0 120 110" class:list={['text-mist', className]} fill="none" aria-hidden="true">
+	<path
+		d="M18 100 C 42 95, 78 104, 102 98"
+		class="animate-draw stroke-ink/25"
+		stroke-width="1.5"
+		stroke-linecap="round"
+		pathLength="1"
+		stroke-dasharray="1"></path>
+	<path
+		d="M60 99 C 60 86, 56 74, 60 58"
+		class="animate-draw [animation-delay:300ms]"
+		stroke="currentColor"
+		stroke-width="1.8"
+		stroke-linecap="round"
+		pathLength="1"
+		stroke-dasharray="1"></path>
+	<g class="origin-[60px_72px] animate-sway">
+		<path
+			d="M59 74 C 47 74, 37 66, 33 53 C 46 53, 56 61, 59 74 Z"
+			class="animate-rise fill-mist/15 [animation-delay:900ms]"
+			stroke="currentColor"
+			stroke-width="1.5"
+			stroke-linejoin="round"></path>
+	</g>
+	<g class="origin-[60px_60px] animate-sway [animation-delay:-3s]">
+		<path
+			d="M60 60 C 64 47, 75 40, 89 41 C 85 54, 73 61, 60 60 Z"
+			class="animate-rise fill-mist/15 [animation-delay:1100ms]"
+			stroke="currentColor"
+			stroke-width="1.5"
+			stroke-linejoin="round"></path>
+	</g>
+</svg>

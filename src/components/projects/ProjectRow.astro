@@ -1,0 +1,39 @@
+---
+import ProjectLinks from './ProjectLinks.astro';
+import ProjectMeta from './ProjectMeta.astro';
+import { projectYears, type Project } from '../../lib/projects';
+
+interface Props {
+	project: Project;
+}
+
+const { project } = Astro.props;
+---
+
+<li class="group relative border-b border-ink/10">
+	<div class="grid gap-x-8 gap-y-2 py-8 md:grid-cols-[8rem_1fr_auto] md:items-baseline">
+		<p class="font-mono text-xs uppercase tracking-[0.15em] text-muted">
+			<span class="sr-only">Active </span>{projectYears(project)}
+		</p>
+		<div>
+			<h2 class="font-display text-2xl tracking-tight md:text-3xl">
+				<!-- Stretched link: the whole row opens the repo; the links below sit above it. -->
+				<a
+					href={project.repo.url}
+					target="_blank"
+					rel="noopener noreferrer"
+					class="transition-colors duration-300 after:absolute after:inset-0 group-hover:text-accent"
+				>
+					{project.title}
+				</a>
+			</h2>
+			{
+				project.repo.description && (
+					<p class="mt-2 max-w-xl text-ink/70">{project.repo.description}</p>
+				)
+			}
+			<ProjectMeta project={project} class="mt-4" />
+		</div>
+		<ProjectLinks project={project} class="mt-3 md:mt-0 md:justify-end" />
+	</div>
+</li>

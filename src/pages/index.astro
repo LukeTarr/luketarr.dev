@@ -1,8 +1,44 @@
 ---
-import Home from '../components/Home.astro';
 import Layout from '../layouts/Layout.astro';
+import Portrait from '../components/Portrait.astro';
+import PostList from '../components/PostList.astro';
+import SocialLinks from '../components/SocialLinks.astro';
+import TitleCycler from '../components/react/TitleCycler';
+import { getPosts } from '../lib/posts';
+
+const recent = (await getPosts()).slice(0, 3);
 ---
 
 <Layout>
-    <Home/>
+	<section class="grid items-center gap-24 pt-12 md:grid-cols-[1.2fr_0.8fr] md:gap-12 md:pt-24">
+		<div>
+			<h1
+				class="animate-rise text-balance font-display text-[clamp(3.25rem,9vw,6.75rem)] font-normal leading-[0.95] tracking-tight"
+			>
+				Hey, I'm <em class="whitespace-nowrap font-light text-accent">Luke Tarr</em>!
+			</h1>
+			<div class="mt-8 animate-rise [animation-delay:120ms]">
+				<TitleCycler client:idle />
+			</div>
+			<SocialLinks variant="labels" class="mt-14 animate-rise [animation-delay:240ms]" />
+		</div>
+
+		<Portrait />
+	</section>
+
+	{
+		recent.length > 0 && (
+			<section aria-labelledby="writing" class="mt-40 md:mt-48">
+				<div class="flex items-baseline justify-between pb-6">
+					<h2 id="writing" class="font-display text-3xl tracking-tight md:text-4xl">
+						Recent writing
+					</h2>
+					<a href="/blog" class="font-mono text-sm text-ink/60 transition-colors hover:text-accent">
+						all posts →
+					</a>
+				</div>
+				<PostList posts={recent} />
+			</section>
+		)
+	}
 </Layout>

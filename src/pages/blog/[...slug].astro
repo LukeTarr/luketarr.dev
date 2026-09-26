@@ -1,21 +1,56 @@
 ---
-import { getCollection } from 'astro:content';
+import { render } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
+import { formatDate, getPosts, type Post } from '../../lib/posts';
 
 export async function getStaticPaths() {
-  const posts = await getCollection('blog');
-  return posts.map(post => ({ params: { slug: post.slug }, props: { post } }));
+	const posts = await getPosts();
+	return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+
+interface Props {
+	post: Post;
 }
 
 const { post } = Astro.props;
-const { Content } = await post.render();
+const { Content } = await render(post);
 ---
 
-<Layout>
-  <article class="prose mx-auto my-8 px-4 max-w-2xl">
-    <h1 class="text-center">{post.data.title}</h1>
-    <p class="text-gray-500 text-sm mb-2 text-center">{post.data.date}</p>
-    <p class="mb-4 text-center">{post.data.description}</p>
-    <Content />
-  </article>
+<Layout title={post.data.title} description={post.data.description}>
+	<article class="mx-auto max-w-2xl pt-10 md:pt-16">
+		<a
+			href="/blog"
+			class="group inline-flex items-center gap-2 font-mono text-sm text-ink/60 transition-colors hover:text-accent"
+		>
+			<span aria-hidden="true" class="transition-transform group-hover:-translate-x-1">←</span>
+			all posts
+		</a>
+
+		<header class="mt-12 animate-rise">
+			<time
+				datetime={post.data.date.toISOString()}
+				class="font-mono text-xs uppercase tracking-[0.2em] text-muted"
+			>
+				{formatDate(post.data.date)}
+			</time>
+			<h1 class="mt-4 text-balance font-display text-5xl leading-[1.05] tracking-tight md:text-6xl">
+				{post.data.title}
+			</h1>
+			<p class="mt-5 font-display text-xl italic text-ink/70">{post.data.description}</p>
+			<svg viewBox="0 0 96 12" class="mt-8 h-3 w-24 text-accent" fill="none" aria-hidden="true">
+				<path
+					d="M2 7c10-5 18-5 28 0s18 5 28 0 18-5 28 0 6 2 8 1"
+					stroke="currentColor"
+					stroke-width="1.8"
+					stroke-linecap="round"
+					pathLength="1"
+					stroke-dasharray="1"
+					class="animate-draw [animation-delay:300ms]"></path>
+			</svg>
+		</header>
+
+		<div class="prose prose-lg mt-10 max-w-none animate-rise [animation-delay:150ms]">
+			<Content />
+		</div>
+	</article>
 </Layout>

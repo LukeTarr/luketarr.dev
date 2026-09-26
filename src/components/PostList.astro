@@ -1,0 +1,43 @@
+---
+import { formatShortDate, type Post } from '../lib/posts';
+
+interface Props {
+	posts: Post[];
+	class?: string;
+}
+
+const { posts, class: className } = Astro.props;
+---
+
+<ul class:list={['border-t border-ink/10', className]}>
+	{posts.length === 0 && <li class="py-10 text-ink/60">No blog posts found.</li>}
+	{
+		posts.map((post) => (
+			<li class="border-b border-ink/10">
+				<a
+					href={`/blog/${post.id}`}
+					class="group grid gap-x-8 gap-y-2 py-8 md:grid-cols-[8rem_1fr_auto] md:items-baseline"
+				>
+					<time
+						datetime={post.data.date.toISOString()}
+						class="font-mono text-xs uppercase tracking-[0.15em] text-muted"
+					>
+						{formatShortDate(post.data.date)}
+					</time>
+					<div>
+						<h3 class="font-display text-2xl tracking-tight transition-colors duration-300 group-hover:text-accent md:text-3xl">
+							{post.data.title}
+						</h3>
+						<p class="mt-2 max-w-xl text-ink/70">{post.data.description}</p>
+					</div>
+					<span
+						aria-hidden="true"
+						class="hidden font-display text-2xl text-ink/30 transition-all duration-300 group-hover:translate-x-1 group-hover:text-accent md:block"
+					>
+						→
+					</span>
+				</a>
+			</li>
+		))
+	}
+</ul>

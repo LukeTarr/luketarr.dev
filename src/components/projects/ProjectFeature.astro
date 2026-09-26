@@ -1,0 +1,58 @@
+---
+import { render } from 'astro:content';
+import ProjectLinks from './ProjectLinks.astro';
+import ProjectMeta from './ProjectMeta.astro';
+import { projectYears, type Project } from '../../lib/projects';
+
+interface Props {
+	project: Project;
+}
+
+const { project } = Astro.props;
+const WriteUp = project.note?.body?.trim() ? (await render(project.note)).Content : null;
+---
+
+<article class="grid gap-x-8 gap-y-3 md:grid-cols-[8rem_1fr]">
+	<div
+		class="flex items-center gap-3 font-mono text-xs uppercase tracking-[0.15em] md:flex-col md:items-start"
+	>
+		<span class="text-muted"><span class="sr-only">Active </span>{projectYears(project)}</span>
+		<span class="flex items-center gap-1.5 text-accent">
+			<svg viewBox="0 0 24 12" class="h-2.5 w-5" fill="none" aria-hidden="true">
+				<path
+					d="M1 7c3-4 5-4 7.5 0s5 4 7.5 0 5-4 7-1"
+					stroke="currentColor"
+					stroke-width="1.8"
+					stroke-linecap="round"></path>
+			</svg>
+			featured
+		</span>
+	</div>
+
+	<div class="max-w-2xl">
+		<h2 class="font-display text-4xl tracking-tight md:text-5xl">
+			<a
+				href={project.repo.url}
+				target="_blank"
+				rel="noopener noreferrer"
+				class="transition-colors duration-300 hover:text-accent"
+			>
+				{project.title}
+			</a>
+		</h2>
+		{
+			project.repo.description && (
+				<p class="mt-4 font-display text-xl italic text-ink/70">{project.repo.description}</p>
+			)
+		}
+		{
+			WriteUp && (
+				<div class="prose mt-6 max-w-none">
+					<WriteUp />
+				</div>
+			)
+		}
+		<ProjectMeta project={project} class="mt-6" />
+		<ProjectLinks project={project} class="mt-4" />
+	</div>
+</article>

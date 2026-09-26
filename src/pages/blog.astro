@@ -1,18 +1,22 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { getCollection } from 'astro:content';
-const posts = await getCollection('blog');
+import PostList from '../components/PostList.astro';
+import { getPosts } from '../lib/posts';
+
+const posts = await getPosts();
 ---
-<Layout>
-  <h1 class="text-4xl font-bold text-center my-8">Blog</h1>
-  <ul class="max-w-2xl mx-auto">
-    {posts.length === 0 && <li>No blog posts found.</li>}
-    {posts.reverse().map(post => (
-      <li class="mb-8 border-b pb-4">
-        <a href={"/blog/" + post.slug} class="text-2xl font-semibold text-blue-700 hover:underline">{post.data.title}</a>
-        <div class="text-gray-500 text-sm">{post.data.date}</div>
-        <div class="text-gray-700 mb-2">{post.data.description}</div>
-      </li>
-    ))}
-  </ul>
+
+<Layout title="Blog" description="Writing by Luke Tarr.">
+	<header class="pb-12 pt-12 md:pb-16 md:pt-20">
+		<p class="animate-rise font-mono text-xs uppercase tracking-[0.25em] text-muted">
+			{posts.length}
+			{posts.length === 1 ? 'post' : 'posts'}
+		</p>
+		<h1
+			class="mt-3 animate-rise font-display text-6xl tracking-tight [animation-delay:100ms] md:text-8xl"
+		>
+			Blog
+		</h1>
+	</header>
+	<PostList posts={posts} class="animate-rise [animation-delay:200ms]" />
 </Layout>

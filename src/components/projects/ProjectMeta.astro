@@ -1,0 +1,31 @@
+---
+import type { Project } from '../../lib/projects';
+
+interface Props {
+	project: Project;
+	class?: string;
+}
+
+const { project, class: className } = Astro.props;
+const { language, stars } = project.repo;
+---
+
+{
+	(language || stars > 0) && (
+		<p class:list={['flex items-center gap-4 font-mono text-xs text-muted', className]}>
+			{language && (
+				<span class="flex items-center gap-1.5">
+					<span aria-hidden="true" class="h-2 w-2 rounded-blob bg-mist" />
+					{language}
+				</span>
+			)}
+			{stars > 0 && (
+				<span>
+					<span aria-hidden="true">★ </span>
+					{stars}
+					<span class="sr-only">{stars === 1 ? 'star' : 'stars'}</span>
+				</span>
+			)}
+		</p>
+	)
+}

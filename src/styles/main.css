@@ -1,3 +1,77 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+	/* Space-separated RGB channels so Tailwind can apply alpha, e.g. `text-ink/60`. */
+	:root {
+		--paper: 246 241 232;
+		--ink: 33 29 25;
+		--muted: 112 103 92;
+		--accent: 37 84 166;
+		--mist: 74 110 150;
+		color-scheme: light;
+	}
+
+	:root.dark {
+		--paper: 14 19 30;
+		--ink: 226 232 242;
+		--muted: 142 156 178;
+		--accent: 122 164 235;
+		--mist: 150 182 214;
+		color-scheme: dark;
+	}
+
+	html {
+		@apply bg-paper font-sans text-ink antialiased;
+		font-optical-sizing: auto;
+		text-rendering: optimizeLegibility;
+	}
+
+	::selection {
+		@apply bg-accent/25 text-ink;
+	}
+
+	:focus-visible {
+		@apply rounded-sm outline outline-2 outline-offset-4 outline-accent;
+	}
+}
+
+@layer components {
+	/* Film grain over everything; generated noise keeps the page from feeling flat and digital. */
+	.grain {
+		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+	}
+}
+
+/* Cross-document view transitions: pages dissolve into each other in supporting browsers. */
+@view-transition {
+	navigation: auto;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+	animation-duration: 350ms;
+}
+
+/* The topography canvas doesn't crossfade: the old frame holds until the new page's
+   canvas (same wall-clock landscape) starts drawing, so the backdrop never blinks. */
+::view-transition-group(topography),
+::view-transition-old(topography),
+::view-transition-new(topography) {
+	animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	@view-transition {
+		navigation: none;
+	}
+
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+	}
+}

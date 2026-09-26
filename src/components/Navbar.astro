@@ -1,33 +1,66 @@
 ---
-import { Fragment } from 'astro/jsx-runtime';
+import ThemeToggle from './react/ThemeToggle';
+import { nav, site } from '../data/site';
+
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWith(href));
 ---
 
-<nav
-    class='flex flex-row items-center justify-between bg-gray-800 w-full p-4 mt-0 md:mt-4 md:w-10/12 md:rounded-full h-18'>
-    <div class='flex flex-row items-center justify-around md:mx-10'>
-        <a href='/' class='w-10 h-10 mr-4'>
-            <img src='/favicon.png' alt='Luke Tarr Logo' class="w-10 h-10 ml-2"/>
-        </a>
+<header
+	class="mx-auto flex w-full max-w-5xl items-center justify-between px-6 pb-4 pt-6 md:px-10 md:pt-10"
+>
+	<a href="/" class="group flex items-center gap-3" aria-label={`${site.domain} — home`}>
+		<span
+			class="grid h-10 w-10 animate-morph place-items-center rounded-blob bg-ink font-display text-xl italic text-paper transition-colors duration-500 group-hover:bg-accent"
+			aria-hidden="true"
+		>
+			L
+		</span>
+		<span class="hidden font-display text-xl tracking-tight sm:inline">
+			luketarr<span class="text-accent">.</span>dev
+		</span>
+	</a>
 
-        <a href='/' class='text-white text-2xl font-bold invisible w-0 md:w-auto md:visible no-underline'>
-            luketarr.dev
-        </a>
-    </div>
-    <div class='flex flex-row items-center justify-center md:mx-10 mr-2'>
-        <ul class='flex space-x-4'>
-            <li class="list-none">
-                <a href='/' class='text-white hover:text-gray-400 no-underline'>
-                    Home
-                </a>
-            </li>
-            <li class="list-none">
-                <a href='/projects' class='text-white hover:text-gray-400 no-underline'>
-                    Projects
-                </a>
-            </li>
-            <li class="list-none">
-                <a href='/blog' class='text-white hover:text-gray-400 no-underline'>Blog</a>
-            </li>
-        </ul>
-    </div>
-</nav>
+	<nav aria-label="Main" class="flex items-center gap-1 sm:gap-3">
+		<ul class="flex items-center gap-1 sm:gap-2">
+			{
+				nav.map(({ label, href }) => {
+					const active = isActive(href);
+					return (
+						<li>
+							<a
+								href={href}
+								aria-current={active ? 'page' : undefined}
+								class:list={[
+									'group relative block px-2.5 py-1.5 text-[0.95rem] transition-colors',
+									active ? 'text-ink' : 'text-ink/60 hover:text-ink',
+								]}
+							>
+								{label}
+								<svg
+									viewBox="0 0 60 8"
+									preserveAspectRatio="none"
+									aria-hidden="true"
+									class:list={[
+										'absolute inset-x-2 -bottom-0.5 h-2 w-[calc(100%-1rem)] text-accent transition-opacity duration-300',
+										active ? 'opacity-100' : 'opacity-0 group-hover:opacity-50',
+									]}
+								>
+									<path
+										d="M1 5c9-3 16-3 24-1s17 3 24 0 8-2 10-1"
+										fill="none"
+										stroke="currentColor"
+										stroke-width="1.8"
+										stroke-linecap="round"
+									/>
+								</svg>
+							</a>
+						</li>
+					);
+				})
+			}
+		</ul>
+		<span class="mx-1 h-5 w-px bg-ink/15" aria-hidden="true"></span>
+		<ThemeToggle client:load />
+	</nav>
+</header>
