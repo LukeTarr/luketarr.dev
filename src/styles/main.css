@@ -1,39 +1,170 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+@plugin '@tailwindcss/typography';
+
+/* Dark mode follows the `.dark` class the head script sets, not just the OS preference. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Space-separated RGB channels, swapped per theme below. The topography canvas reads them too. */
+:root {
+	--paper: 246 241 232;
+	--ink: 33 29 25;
+	--muted: 112 103 92;
+	--accent: 37 84 166;
+	--mist: 74 110 150;
+	color-scheme: light;
+}
+
+:root.dark {
+	--paper: 14 19 30;
+	--ink: 226 232 242;
+	--muted: 142 156 178;
+	--accent: 122 164 235;
+	--mist: 150 182 214;
+	color-scheme: dark;
+}
+
+/* `inline` so utilities reference the live channels; opacity modifiers like `text-ink/60` still work. */
+@theme inline {
+	--color-paper: rgb(var(--paper));
+	--color-ink: rgb(var(--ink));
+	--color-muted: rgb(var(--muted));
+	--color-accent: rgb(var(--accent));
+	--color-mist: rgb(var(--mist));
+}
+
+@theme {
+	--font-display: 'Fraunces Variable', ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
+	--font-sans:
+		'Instrument Sans Variable', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
+		'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+	--font-mono:
+		'JetBrains Mono Variable', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+		'Liberation Mono', 'Courier New', monospace;
+
+	--radius-blob: 62% 38% 46% 54% / 55% 44% 56% 45%;
+
+	--animate-morph: morph 18s ease-in-out infinite;
+	--animate-rise: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+	--animate-draw: draw 1.6s cubic-bezier(0.65, 0, 0.35, 1) both;
+	--animate-sway: sway 6s ease-in-out infinite;
+
+	@keyframes morph {
+		0%,
+		100% {
+			border-radius: 62% 38% 46% 54% / 55% 44% 56% 45%;
+		}
+		33% {
+			border-radius: 41% 59% 58% 42% / 45% 58% 42% 55%;
+		}
+		66% {
+			border-radius: 55% 45% 36% 64% / 62% 38% 60% 40%;
+		}
+	}
+
+	@keyframes rise {
+		from {
+			opacity: 0;
+			transform: translateY(14px);
+			filter: blur(6px);
+		}
+		to {
+			opacity: 1;
+			transform: none;
+			filter: none;
+		}
+	}
+
+	@keyframes draw {
+		from {
+			stroke-dashoffset: 1;
+		}
+		to {
+			stroke-dashoffset: 0;
+		}
+	}
+
+	@keyframes sway {
+		0%,
+		100% {
+			transform: rotate(-3deg);
+		}
+		50% {
+			transform: rotate(3deg);
+		}
+	}
+}
+
+/* Long-form text (blog posts, project write-ups) in the site palette. */
+@utility prose {
+	--tw-prose-body: rgb(var(--ink) / 0.85);
+	--tw-prose-headings: rgb(var(--ink));
+	--tw-prose-lead: rgb(var(--muted));
+	--tw-prose-links: rgb(var(--accent));
+	--tw-prose-bold: rgb(var(--ink));
+	--tw-prose-counters: rgb(var(--muted));
+	--tw-prose-bullets: rgb(var(--accent) / 0.6);
+	--tw-prose-hr: rgb(var(--ink) / 0.12);
+	--tw-prose-quotes: rgb(var(--ink));
+	--tw-prose-quote-borders: rgb(var(--accent) / 0.5);
+	--tw-prose-captions: rgb(var(--muted));
+	--tw-prose-code: rgb(var(--ink));
+	--tw-prose-pre-code: rgb(var(--paper));
+	--tw-prose-pre-bg: rgb(var(--ink));
+	--tw-prose-th-borders: rgb(var(--ink) / 0.2);
+	--tw-prose-td-borders: rgb(var(--ink) / 0.1);
+
+	& :where(h1, h2, h3, h4):not(:where([class~='not-prose'], [class~='not-prose'] *)) {
+		font-family: var(--font-display);
+		font-weight: 500;
+		letter-spacing: -0.01em;
+	}
+
+	& :where(a):not(:where([class~='not-prose'], [class~='not-prose'] *)) {
+		text-decoration-color: rgb(var(--accent) / 0.35);
+		text-underline-offset: 0.2em;
+		text-decoration-thickness: 1.5px;
+		transition: text-decoration-color 200ms;
+
+		&:hover {
+			text-decoration-color: rgb(var(--accent));
+		}
+	}
+
+	& :where(code):not(:where([class~='not-prose'], [class~='not-prose'] *)) {
+		font-weight: 500;
+
+		&::before,
+		&::after {
+			content: none;
+		}
+	}
+}
 
 @layer base {
-	/* Space-separated RGB channels so Tailwind can apply alpha, e.g. `text-ink/60`. */
-	:root {
-		--paper: 246 241 232;
-		--ink: 33 29 25;
-		--muted: 112 103 92;
-		--accent: 37 84 166;
-		--mist: 74 110 150;
-		color-scheme: light;
-	}
-
-	:root.dark {
-		--paper: 14 19 30;
-		--ink: 226 232 242;
-		--muted: 142 156 178;
-		--accent: 122 164 235;
-		--mist: 150 182 214;
-		color-scheme: dark;
-	}
-
 	html {
 		@apply bg-paper font-sans text-ink antialiased;
 		font-optical-sizing: auto;
 		text-rendering: optimizeLegibility;
 	}
 
+	/* Tailwind v4's preflight no longer gives buttons a pointer cursor. */
+	button:not(:disabled),
+	[role='button']:not(:disabled) {
+		cursor: pointer;
+	}
+
 	::selection {
 		@apply bg-accent/25 text-ink;
 	}
 
+	/* The ring color is set up front: v4's `transition-colors` also animates outline-color,
+	   so setting it only on focus would fade the ring in from the text color. */
+	* {
+		@apply outline-accent;
+	}
+
 	:focus-visible {
-		@apply rounded-sm outline outline-2 outline-offset-4 outline-accent;
+		@apply rounded-xs outline-2 outline-offset-4;
 	}
 }
 

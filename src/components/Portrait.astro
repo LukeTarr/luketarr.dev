@@ -3,24 +3,18 @@ import { Picture } from 'astro:assets';
 import portrait from '../assets/luke-portrait.jpg';
 ---
 
-<figure
-	class="relative isolate mx-auto w-[88%] max-w-[18rem] animate-rise [animation-delay:250ms] md:w-full md:max-w-none"
->
+<figure class="relative isolate mx-auto w-[88%] max-w-[18rem] animate-rise [animation-delay:250ms] md:w-full md:max-w-none">
 	<!-- Soft blue glow and an offset ink outline, both breathing slightly out of step with the photo. -->
 	<div
 		aria-hidden="true"
 		class="absolute -inset-8 -z-10 animate-morph rounded-blob bg-mist/20 blur-3xl"
-	>
-	</div>
+	></div>
 	<div
 		aria-hidden="true"
 		class="absolute inset-0 translate-x-4 translate-y-5 rotate-6 animate-morph rounded-blob border-[1.5px] border-accent/60 [animation-delay:-7s]"
-	>
-	</div>
+	></div>
 
-	<div
-		class="relative aspect-[4/5] animate-morph overflow-hidden rounded-blob bg-ink/10 shadow-2xl shadow-ink/10"
-	>
+	<div class="relative aspect-[4/5] animate-morph overflow-hidden rounded-blob bg-ink/10 shadow-2xl shadow-ink/10">
 		<Picture
 			src={portrait}
 			alt="Luke Tarr holding chopsticks and a cup of food"
@@ -33,21 +27,21 @@ import portrait from '../assets/luke-portrait.jpg';
 		/>
 	</div>
 
-	<figcaption
-		class="absolute -bottom-14 left-0 flex -rotate-3 items-end gap-2 font-display text-lg italic text-muted md:-left-10"
-	>
+	<figcaption class="absolute -bottom-14 left-0 flex -rotate-3 items-end gap-2 font-display text-lg italic text-muted md:-left-10">
 		<svg viewBox="0 0 48 40" class="mb-3 h-8 w-10 text-accent" fill="none" aria-hidden="true">
 			<path
 				d="M4 36 C 8 20, 20 10, 40 6"
 				stroke="currentColor"
 				stroke-width="1.6"
-				stroke-linecap="round"></path>
+				stroke-linecap="round"
+			></path>
 			<path
 				d="M32 3 L 41 6 L 35 13"
 				stroke="currentColor"
 				stroke-width="1.6"
 				stroke-linecap="round"
-				stroke-linejoin="round"></path>
+				stroke-linejoin="round"
+			></path>
 		</svg>
 		me, March 2021
 	</figcaption>

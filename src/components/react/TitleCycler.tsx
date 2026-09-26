@@ -33,13 +33,13 @@ export default function TitleCycler() {
 	}, []);
 
 	return (
-		<p className="font-display text-2xl italic text-ink/80 md:text-3xl">
+		<p className="font-display text-2xl text-ink/80 italic md:text-3xl">
 			<span className="sr-only">{titles.join(', ')}</span>
 			<span aria-hidden="true" className="relative inline-block">
 				<span
 					key={index}
 					className={`inline-block animate-rise transition-all ease-out ${
-						leaving ? '-translate-y-2 opacity-0 blur-sm' : ''
+						leaving ? '-translate-y-2 opacity-0 blur-xs' : ''
 					}`}
 					style={{ transitionDuration: `${FADE_MS}ms` }}
 				>

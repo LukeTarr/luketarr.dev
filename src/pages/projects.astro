@@ -13,69 +13,65 @@ const rest = projects.filter((p) => !p.featured);
 ---
 
 <Layout title="Projects" description={`Things ${site.name} has built.`}>
-	{
-		projects.length === 0 ? (
-			<section class="flex min-h-[55vh] flex-col items-center justify-center pt-16 text-center">
-				<Seedling class="h-36 w-36" />
-				<p class="mt-6 font-mono text-xs uppercase tracking-[0.25em] text-mist">
-					Under construction
-				</p>
-				<h1 class="mt-3 font-display text-6xl tracking-tight md:text-7xl">Projects</h1>
-				<p class="mt-6 max-w-md text-balance text-lg text-ink/70">
-					This section is currently under construction. Please check back later.
-				</p>
-				{github && (
+	{projects.length === 0 ? (
+		<section class="flex min-h-[55vh] flex-col items-center justify-center pt-16 text-center">
+			<Seedling class="h-36 w-36" />
+			<p class="mt-6 font-mono text-xs uppercase tracking-[0.25em] text-mist">Under construction</p>
+			<h1 class="mt-3 font-display text-6xl tracking-tight md:text-7xl">Projects</h1>
+			<p class="mt-6 max-w-md text-balance text-lg text-ink/70">
+				This section is currently under construction. Please check back later.
+			</p>
+			{github && (
+				<a
+					href={github.href}
+					target="_blank"
+					rel="noopener noreferrer"
+					class="mt-10 font-mono text-sm text-ink/60 underline decoration-accent/40 underline-offset-4 transition-colors hover:text-accent hover:decoration-accent"
+				>
+					meanwhile, on github ↗
+				</a>
+			)}
+		</section>
+	) : (
+		<>
+			<header class="pb-12 pt-12 md:pb-16 md:pt-20">
+				<p class="animate-rise font-mono text-xs uppercase tracking-[0.25em] text-muted">
+					{projects.length} {projects.length === 1 ? 'project' : 'projects'} · from{' '}
 					<a
-						href={github.href}
+						href={github?.href}
 						target="_blank"
 						rel="noopener noreferrer"
-						class="mt-10 font-mono text-sm text-ink/60 underline decoration-accent/40 underline-offset-4 transition-colors hover:text-accent hover:decoration-accent"
+						class="underline decoration-accent/40 underline-offset-4 transition-colors hover:text-accent hover:decoration-accent"
 					>
-						meanwhile, on github ↗
+						github
 					</a>
-				)}
-			</section>
-		) : (
-			<>
-				<header class="pb-12 pt-12 md:pb-16 md:pt-20">
-					<p class="animate-rise font-mono text-xs uppercase tracking-[0.25em] text-muted">
-						{projects.length} {projects.length === 1 ? 'project' : 'projects'} · from{' '}
-						<a
-							href={github?.href}
-							target="_blank"
-							rel="noopener noreferrer"
-							class="underline decoration-accent/40 underline-offset-4 transition-colors hover:text-accent hover:decoration-accent"
-						>
-							github
-						</a>
-					</p>
-					<h1 class="mt-3 animate-rise font-display text-6xl tracking-tight [animation-delay:100ms] md:text-8xl">
-						Projects
-					</h1>
-				</header>
+				</p>
+				<h1 class="mt-3 animate-rise font-display text-6xl tracking-tight [animation-delay:100ms] md:text-8xl">
+					Projects
+				</h1>
+			</header>
 
-				{featured.length > 0 && (
-					<section
-						aria-label="Featured projects"
-						class="mb-20 animate-rise space-y-20 [animation-delay:200ms]"
-					>
-						{featured.map((project) => (
-							<ProjectFeature project={project} />
-						))}
-					</section>
-				)}
+			{featured.length > 0 && (
+				<section
+					aria-label="Featured projects"
+					class="mb-20 animate-rise space-y-20 [animation-delay:200ms]"
+				>
+					{featured.map((project) => (
+						<ProjectFeature project={project} />
+					))}
+				</section>
+			)}
 
-				{rest.length > 0 && (
-					<ul
-						aria-label={featured.length > 0 ? 'More projects' : 'Projects'}
-						class="animate-rise border-t border-ink/10 [animation-delay:250ms]"
-					>
-						{rest.map((project) => (
-							<ProjectRow project={project} />
-						))}
-					</ul>
-				)}
-			</>
-		)
-	}
+			{rest.length > 0 && (
+				<ul
+					aria-label={featured.length > 0 ? 'More projects' : 'Projects'}
+					class="animate-rise border-t border-ink/10 [animation-delay:250ms]"
+				>
+					{rest.map((project) => (
+						<ProjectRow project={project} />
+					))}
+				</ul>
+			)}
+		</>
+	)}
 </Layout>

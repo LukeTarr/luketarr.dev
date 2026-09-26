@@ -15,25 +15,22 @@ const links = [
 ---
 
 <ul class:list={['flex flex-wrap gap-x-5 gap-y-2 font-mono text-sm', className]}>
-	{
-		links.map(({ label, href }) => (
-			<li>
-				<a
-					href={href}
-					target="_blank"
-					rel="noopener noreferrer"
-					class="group/link relative z-10 text-ink/60 underline decoration-accent/0 underline-offset-4 transition-colors hover:text-accent hover:decoration-accent"
+	{links.map(({ label, href }) => (
+		<li>
+			<a
+				href={href}
+				target="_blank"
+				rel="noopener noreferrer"
+				class="group/link relative z-10 text-ink/60 underline decoration-accent/0 underline-offset-4 transition-colors hover:text-accent hover:decoration-accent"
+			>
+				{label} <span class="sr-only">for {project.title}</span>{' '}
+				<span
+					aria-hidden="true"
+					class="inline-block transition-transform group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5"
 				>
-					{label}
-					<span class="sr-only">for {project.title}</span>
-					<span
-						aria-hidden="true"
-						class="inline-block transition-transform group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5"
-					>
-						↗
-					</span>
-				</a>
-			</li>
-		))
-	}
+					↗
+				</span>
+			</a>
+		</li>
+	))}
 </ul>

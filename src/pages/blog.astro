@@ -9,12 +9,9 @@ const posts = await getPosts();
 <Layout title="Blog" description="Writing by Luke Tarr.">
 	<header class="pb-12 pt-12 md:pb-16 md:pt-20">
 		<p class="animate-rise font-mono text-xs uppercase tracking-[0.25em] text-muted">
-			{posts.length}
-			{posts.length === 1 ? 'post' : 'posts'}
+			{posts.length} {posts.length === 1 ? 'post' : 'posts'}
 		</p>
-		<h1
-			class="mt-3 animate-rise font-display text-6xl tracking-tight [animation-delay:100ms] md:text-8xl"
-		>
+		<h1 class="mt-3 animate-rise font-display text-6xl tracking-tight [animation-delay:100ms] md:text-8xl">
 			Blog
 		</h1>
 	</header>

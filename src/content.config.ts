@@ -1,4 +1,5 @@
-import { defineCollection, z } from 'astro:content';
+import { defineCollection } from 'astro:content';
+import { z } from 'astro/zod';
 import { glob, type Loader } from 'astro/loaders';
 import { site } from './data/site';
 import { fetchRepos } from './lib/github';
@@ -70,8 +71,8 @@ const projects = defineCollection({
 	schema: z.object({
 		name: z.string(),
 		description: z.string().nullable(),
-		url: z.string().url(),
-		homepage: z.string().url().nullable(),
+		url: z.url(),
+		homepage: z.url().nullable(),
 		language: z.string().nullable(),
 		stars: z.number(),
 		topics: z.array(z.string()),
@@ -90,7 +91,7 @@ const projectNotes = defineCollection({
 	schema: z.object({
 		featured: z.boolean().default(false),
 		title: z.string().optional(),
-		links: z.array(z.object({ label: z.string(), href: z.string().url() })).default([]),
+		links: z.array(z.object({ label: z.string(), href: z.url() })).default([]),
 	}),
 });
 
