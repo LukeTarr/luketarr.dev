@@ -1,19 +1,47 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import PostList from '../components/PostList.astro';
+import Quill from '../components/Quill.astro';
 import { getPosts } from '../lib/posts';
 
 const posts = await getPosts();
 ---
 
 <Layout title="Blog" description="Writing by Luke Tarr.">
-	<header class="pb-12 pt-12 md:pb-16 md:pt-20">
-		<p class="animate-rise font-mono text-xs uppercase tracking-[0.25em] text-muted">
-			{posts.length} {posts.length === 1 ? 'post' : 'posts'}
-		</p>
-		<h1 class="mt-3 animate-rise font-display text-6xl tracking-tight [animation-delay:100ms] md:text-8xl">
-			Blog
-		</h1>
-	</header>
-	<PostList posts={posts} class="animate-rise [animation-delay:200ms]" />
+	{posts.length === 0 ? (
+		<section class="flex min-h-[55vh] flex-col items-center justify-center pt-16 text-center">
+			<Quill class="h-40 w-40" />
+			<p class="mt-6 animate-rise font-mono text-xs uppercase tracking-[0.25em] text-mist [animation-delay:300ms]">
+				Nothing written yet
+			</p>
+			<h1 class="mt-3 animate-rise font-display text-6xl tracking-tight [animation-delay:400ms] md:text-7xl">
+				Blog
+			</h1>
+			<p class="mt-6 max-w-md animate-rise text-balance text-lg text-ink/70 [animation-delay:500ms]">
+				The page is still blank and the ink is still wet.{' '}
+				<em class="font-display text-ink/80">Words are on their way</em>, so check back later.
+			</p>
+			<a
+				href="/"
+				class="group mt-10 inline-flex animate-rise items-center gap-2 font-mono text-sm text-ink/60 transition-colors [animation-delay:600ms] hover:text-accent"
+			>
+				<span aria-hidden="true" class="transition-transform group-hover:-translate-x-1">
+					←
+				</span>
+				back home
+			</a>
+		</section>
+	) : (
+		<>
+			<header class="pb-12 pt-12 md:pb-16 md:pt-20">
+				<p class="animate-rise font-mono text-xs uppercase tracking-[0.25em] text-muted">
+					{posts.length} {posts.length === 1 ? 'post' : 'posts'}
+				</p>
+				<h1 class="mt-3 animate-rise font-display text-6xl tracking-tight [animation-delay:100ms] md:text-8xl">
+					Blog
+				</h1>
+			</header>
+			<PostList posts={posts} class="animate-rise [animation-delay:200ms]" />
+		</>
+	)}
 </Layout>

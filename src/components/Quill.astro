@@ -1,0 +1,81 @@
+---
+interface Props {
+	class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<!-- A quill resting on a blank page: the words haven't arrived yet. -->
+<svg viewBox="0 0 140 124" class:list={['text-mist', className]} fill="none" aria-hidden="true">
+	<path
+		d="M14 114 C 46 109, 92 117, 126 111"
+		class="animate-draw stroke-ink/25"
+		stroke-width="1.5"
+		stroke-linecap="round"
+		pathLength="1"
+		stroke-dasharray="1"
+	></path>
+
+	<!-- The page, with a dog-eared corner. -->
+	<path
+		d="M30 24 C 52 22, 76 23, 96 24 L 110 38 C 111 62, 109 84, 110 106 C 84 108, 56 107, 30 108 C 28 82, 31 52, 30 24 Z"
+		class="animate-draw fill-paper [animation-delay:200ms]"
+		stroke="currentColor"
+		stroke-width="1.5"
+		stroke-linejoin="round"
+		pathLength="1"
+		stroke-dasharray="1"
+	></path>
+	<path
+		d="M96 24 C 96 31, 98 37, 110 38"
+		class="animate-rise fill-mist/15 [animation-delay:1100ms]"
+		stroke="currentColor"
+		stroke-width="1.5"
+		stroke-linejoin="round"
+	></path>
+
+	<!-- Faint ruled lines, still empty. -->
+	{[50, 64, 78, 92].map((y, i) => (
+		<path
+			d={`M40 ${y} C 56 ${y - 1}, 80 ${y + 1}, 100 ${y}`}
+			class="animate-draw stroke-ink/15"
+			style={`animation-delay: ${900 + i * 120}ms`}
+			stroke-width="1"
+			stroke-linecap="round"
+			pathLength="1"
+			stroke-dasharray="1"
+		></path>
+	))}
+
+	<!-- The first few strokes of a sentence, trailing off where the quill rests. -->
+	<path
+		d="M40 64 c 2 -5, 4 -5, 5 0 s 3 5, 5 0 s 3 -5, 5 0 s 3 5, 5 0 s 3 -5, 5 0 c 1 3, 3 3, 4 0"
+		class="animate-draw stroke-accent/70 [animation-delay:1500ms]"
+		stroke-width="1.5"
+		stroke-linecap="round"
+		stroke-linejoin="round"
+		pathLength="1"
+		stroke-dasharray="1"
+	></path>
+	<circle cx="47" cy="84" r="1.6" class="animate-rise fill-accent/50 [animation-delay:2300ms]"></circle>
+
+	<g class="origin-[70px_64px] animate-sway">
+		<path
+			d="M73 60 C 80 42, 100 22, 128 8 C 122 30, 100 50, 75 62 Z"
+			class="animate-rise fill-mist/15 [animation-delay:700ms]"
+			stroke="currentColor"
+			stroke-width="1.5"
+			stroke-linejoin="round"
+		></path>
+		<path
+			d="M70 65 C 84 50, 100 32, 118 17"
+			class="animate-draw [animation-delay:500ms]"
+			stroke="currentColor"
+			stroke-width="1.5"
+			stroke-linecap="round"
+			pathLength="1"
+			stroke-dasharray="1"
+		></path>
+	</g>
+</svg>
